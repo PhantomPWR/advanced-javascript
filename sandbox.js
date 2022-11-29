@@ -19,20 +19,11 @@ let students = [
     }
 ];
 
-let numberOfStudents = students.length;
+let subjects = [...students[0].subjects];
+let item = [...subjects];
+const update = (item, val) => [...item, val];
 
-for (let i = 0; i < numberOfStudents; i++) {
-    let results = (students[i].results['english']);
-    let numResults = results.length;
-    console.log("numResults: ");
-    console.log(numResults);
-    for (let i = 0; i < numResults; i++) {
-        console.log(numResults[i])
-    }
-}
+let updatedSubjects = update(subjects, "Electronics");
 
-const averagePoints = (arr, subject) => {
-    return (arr, subject);
-}
-let averageMarks = averagePoints(students['maths']);
-console.log(averageMarks)
+console.log(subjects);
+console.log(updatedSubjects);
