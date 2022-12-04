@@ -1,60 +1,78 @@
   
 /**
  * To run this file in Gitpod, use the 
- * command node map.js in the terminal
+ * command node filter.js in the terminal
  */
 
-// Using a for loop
-let nums = [1, 2, 3, 4, 5];
-let results = [];
-for (let num of nums) {
-    results.push(num * 2);
-}
-console.log(results);
 
-// Using map()
-const multiplyByTwo = function (num) {
-    return num *2;
-}
-const mapResults = nums.map(multiplyByTwo);
-console.log(mapResults);
+// Simple Filtering
+const people = [
+    {
+      name: 'Michael',
+      age: 23,
+    },
+    {
+      name: 'Lianna',
+      age: 16,
+    },
+    {
+      name: 'Paul',
+      age: 18,
+    },
+  ];
 
-// Simplified w/ map()
-const simplfied = nums.map(function(num){ return num * 2});
-console.log(simplfied);
+// Always returns an array
+  const oldEnough =  people.filter(person => person.age >= 21); // <-- Callback function
+  console.log(oldEnough);
 
-// Simplfied w/ map() + arrow function
-const arrow = nums.map(num => num * 2);
-console.log(arrow);
+  const paul = people.filter(person => person.name === 'Paul')[0];
+  console.log(paul);
 
-// With objects:
-const studentList = [
+
+  // Complex Filtering
+  const studentList = [
     {
       id: 1,
       name: 'Mark',
       profession: 'Developer',
-      skill: 'JavaScript'
+      skills: [
+        { name: 'javascript', yrsExperience: 1 },
+        { name: 'html', yrsExperience: 5 },
+        { name: 'css', yrsExperience: 3 },
+      ]
     },
     {
       id: 2,
       name: 'Ariel',
       profession: 'Developer',
-      skill: 'HTML'
+      skills: [
+        { name: 'javascript', yrsExperience: 0 },
+        { name: 'html', yrsExperience: 4 },
+        { name: 'css', yrsExperience: 2 },
+      ]
     },
     {
       id: 3,
       name: 'Jason',
       profession: 'Designer',
-      skill: 'CSS'
+      skills: [
+        { name: 'javascript', yrsExperience: 1 },
+        { name: 'html', yrsExperience: 1 },
+        { name: 'css', yrsExperience: 5 },
+      ]
     },
   ];
 
-  const studentsWithIds = studentList.map(student => [student.name, student.id]);
-  console.log(studentsWithIds);
+  const has5yearsExp = skill => skill.yrsExperience >= 5;
+  const hasStrongSkills = student => student.skills.filter(has5yearsExp).length > 0;
+  const candidates = studentList.filter(hasStrongSkills);
+  const names = candidates.map(students => students.name);
+  console.log(candidates);
+  console.log(names);
 
 
 // === CHALLENGE ===
-// Map Challenge
+// Filter Challenge
 let students = [
     {
         name: 'John',
@@ -72,19 +90,18 @@ let students = [
         name: 'Adam',
         subjects: ['science', 'maths', 'art'],
         teacher: {science: 'Iris', maths: 'Harry', art: 'Simon'},
-        results: {science: 93, maths: 77, art: 95},
+        results: {science: 84, maths: 97, art: 95},
     },
     {
         name: 'Fran',
         subjects: ['science', 'english', 'art'],
         teacher: {science: 'Iris', english: 'Joan', art: 'Simon'},
-        results: {science: 93, english: 87, art: 95},
+        results: {science: 67, english: 87, art: 95},
     }
 ];
 
-let [john, ...rest] = studentList.map(students => [students.name, students.results]);
-console.log(john);
-console.log(...rest);
+const topMaths = students.filter(student => student.results.maths >= 90);
+console.log(topMaths);
 
 // === MODEL ANSWER ===
 /*
@@ -105,25 +122,17 @@ let students = [
         name: 'Adam',
         subjects: ['science', 'maths', 'art'],
         teacher: {science: 'Iris', maths: 'Harry', art: 'Simon'},
-        results: {science: 93, maths: 77, art: 95},
+        results: {science: 84, maths: 97, art: 95},
     },
     {
         name: 'Fran',
         subjects: ['science', 'english', 'art'],
         teacher: {science: 'Iris', english: 'Joan', art: 'Simon'},
-        results: {science: 93, english: 87, art: 95},
+        results: {science: 67, english: 87, art: 95},
     }
 ];
 
-// single line, used different variable names so as not to clash with those below.
-let [John, ...Rest] = students.map(itm => [itm.name, itm.results]);
-console.log(John);
-console.log(Rest);
 
-console.log('\n');
-// Or create function first and use in map
-const mapper = (itm) => [itm.name, itm.results];
-let [john, ...rest] = students.map(mapper);
-console.log(john);
-console.log(rest);
+const topMaths = students.filter(itm => itm.results.maths >= 90);
+console.log(topMaths);
 */

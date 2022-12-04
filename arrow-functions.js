@@ -90,3 +90,21 @@ const averagePoints = (arr, subject) => {
 };
 let averageMarks = averagePoints(students, "science");
 console.log(averageMarks)
+
+// === MODEL ANSWER ===
+/*
+const averagePoints = (arr, subject) => {
+    let allPoints = 0;
+    let sum = 0;
+    for(let itm of arr) {
+      if(subject in itm.results) {
+        allPoints += itm.results[subject];
+        sum+=1;
+      }
+    }
+    return allPoints / sum;
+};
+
+let averageMarks = averagePoints(students, 'english');
+console.log(averageMarks);
+*/
